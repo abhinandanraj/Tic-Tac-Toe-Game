@@ -2,9 +2,76 @@
 <html>
 	<head>
 		<title>Play Tic Tac Toe</title>
-		<link rel="stylesheet" href="css/style.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="js/script.js"></script>
+	<!--CSS-->
+	<style>
+			body{
+	background:#1c1b1b;
+	color:#666;
+	font-family:"Arial", sans-serif;
+}
+
+h1{
+	text-align:center;
+	color:#666;
+}
+
+.clearfix{
+	clear:both;
+}
+
+#container{
+	width:350px;
+	overflow:auto;
+	margin:40px auto;
+	background:#FFFFFF;
+	padding-bottom:40px;
+	border-radius:10px;
+}
+
+#board li{
+	float:left;
+	margin:10px;
+	height:70px;
+	width:70px;
+	font-size:55px;
+	background:#333;
+	color:#ccc;
+	list-style:none;
+	text-align:center;
+	border-radius:5px;
+}
+
+#board li:hover,#reset:hover{
+	cursor:pointer;
+	background:#000;
+}
+
+#reset{
+	border:0;
+	background:#444;
+	color:#fff;
+	width:70%;
+	padding:15px;
+	border-radius:5px;
+}
+
+.o{
+	color:green !important;
+}
+
+.x{
+	color:red !important;
+}
+
+footer{
+	display:block;
+	text-align:center;
+	padding-top:20px;
+}
+	</style>
+	<!--CSS ended-->
+		
 	</head>
 	<body>
 		<div id="container">
@@ -27,5 +94,107 @@
 				<button id="reset">Reset Game</button>
 			</footer>
 		</div>
+		
+	<!-- JavaScript-->
+	<script>
+	$(document).ready(function(){
+	var x = "x";
+	var o = "o";
+	var turns = 0;
+
+	var spot1 = $('#spot1');
+	var spot2 = $('#spot2');
+	var spot3 = $('#spot3');
+	var spot4 = $('#spot4');
+	var spot5 = $('#spot5');
+	var spot6 = $('#spot6');
+	var spot7 = $('#spot7');
+	var spot8 = $('#spot8');
+	var spot9 = $('#spot9');
+	
+	$('#board li').on('click', function(){
+		if(spot1.hasClass('o') && spot2.hasClass('o') && spot3.hasClass('o') ||
+			spot4.hasClass('o') && spot5.hasClass('o') && spot6.hasClass('o') ||
+			spot7.hasClass('o') && spot8.hasClass('o') && spot9.hasClass('o') ||
+			spot1.hasClass('o') && spot4.hasClass('o') && spot7.hasClass('o') ||
+			spot2.hasClass('o') && spot5.hasClass('o') && spot8.hasClass('o') ||
+			spot3.hasClass('o') && spot6.hasClass('o') && spot9.hasClass('o') ||
+			spot1.hasClass('o') && spot5.hasClass('o') && spot9.hasClass('o') ||
+			spot3.hasClass('o') && spot5.hasClass('o') && spot7.hasClass('o')
+		){
+			alert('Winner: O');
+			$('#board li').text('+');
+			$('#board li').removeClass('disable');
+			$('#board li').removeClass('o');
+			$('#board li').removeClass('x');
+		} else if(spot1.hasClass('x') && spot2.hasClass('x') && spot3.hasClass('x') ||
+			spot4.hasClass('x') && spot5.hasClass('x') && spot6.hasClass('x') ||
+			spot7.hasClass('x') && spot8.hasClass('x') && spot9.hasClass('x') ||
+			spot1.hasClass('x') && spot4.hasClass('x') && spot7.hasClass('x') ||
+			spot2.hasClass('x') && spot5.hasClass('x') && spot8.hasClass('x') ||
+			spot3.hasClass('x') && spot6.hasClass('x') && spot9.hasClass('x') ||
+			spot1.hasClass('x') && spot5.hasClass('x') && spot9.hasClass('x') ||
+			spot3.hasClass('x') && spot5.hasClass('x') && spot7.hasClass('x')
+		){
+			alert('Winner: X');
+			$('#board li').text('+');
+			$('#board li').removeClass('disable');
+			$('#board li').removeClass('o');
+			$('#board li').removeClass('x');
+		} else if(turns == 9){
+			alert('Tie Game');
+			$('#board li').text('+');
+			$('#board li').removeClass('disable');
+			$('#board li').removeClass('o');
+			$('#board li').removeClass('x');
+			turns = 0;
+		} else if($(this).hasClass('disable')){
+			alert('This spot is already filled');
+		} else if(turns%2 == 0){
+			turns++;
+			$(this).text(o);
+			$(this).addClass('disable o');
+			if(spot1.hasClass('o') && spot2.hasClass('o') && spot3.hasClass('o') ||
+				spot4.hasClass('o') && spot5.hasClass('o') && spot6.hasClass('o') ||
+				spot7.hasClass('o') && spot8.hasClass('o') && spot9.hasClass('o') ||
+				spot1.hasClass('o') && spot4.hasClass('o') && spot7.hasClass('o') ||
+				spot2.hasClass('o') && spot5.hasClass('o') && spot8.hasClass('o') ||
+				spot3.hasClass('o') && spot6.hasClass('o') && spot9.hasClass('o') ||
+				spot1.hasClass('o') && spot5.hasClass('o') && spot9.hasClass('o') ||
+				spot3.hasClass('o') && spot5.hasClass('o') && spot7.hasClass('o')
+			){
+				alert('Winner: O');
+				turns = 0;
+			}
+		} else {
+			turns++;
+			$(this).text(x);
+			$(this).addClass('disable x');
+			if(spot1.hasClass('x') && spot2.hasClass('x') && spot3.hasClass('x') ||
+				spot4.hasClass('x') && spot5.hasClass('x') && spot6.hasClass('x') ||
+				spot7.hasClass('x') && spot8.hasClass('x') && spot9.hasClass('x') ||
+				spot1.hasClass('x') && spot4.hasClass('x') && spot7.hasClass('x') ||
+				spot2.hasClass('x') && spot5.hasClass('x') && spot8.hasClass('x') ||
+				spot3.hasClass('x') && spot6.hasClass('x') && spot9.hasClass('x') ||
+				spot1.hasClass('x') && spot5.hasClass('x') && spot9.hasClass('x') ||
+				spot3.hasClass('x') && spot5.hasClass('x') && spot7.hasClass('x')
+			){
+			alert('Winner: X');
+			turns = 0;
+			}
+		}
+	});
+	
+		$("#reset").click(function(){
+		$("#board li").text("+");
+		$("#board li").removeClass('disable');
+		$("#board li").removeClass('o');
+		$("#board li").removeClass('x');
+		turns = 0;
+	});
+});
+	</script>
+	<!--JavaScript ended-->
+		
 	</body>
 </html>
