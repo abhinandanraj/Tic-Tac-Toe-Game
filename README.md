@@ -7,5 +7,5 @@ The game can either result in a win/loss or a tie.
 
 Language: Html, CSS & JavaScript(for logic)
 
-You can visit on this link: https://abhinandanraj.github.io/Tic-Tac-Toe-Game/ .
+View Demo:- <a href="https://abhinandanraj.github.io/Tic-Tac-Toe-Game/">Click Here</a>
 
